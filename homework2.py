@@ -23,6 +23,7 @@ print(len(table))
 
 # Combines information from table class species
 species_table = doc.find_all("table", attrs={"class": "species"})
+# Always define a variable, set breakpoints to see intermediate values
 data = []
 for table in species_table:
     lns = table.find_all("tr")
@@ -30,6 +31,7 @@ for table in species_table:
         common = ln.contents[0].text
         scientific = ln.contents[1].text
         if common != "Common" and scientific != "Scientific":
+            # In good html, there's th, but there's thead and tbody (this is done in tidyverse)
             data.append([common, scientific])
             print(f"{common},{scientific}")
 
